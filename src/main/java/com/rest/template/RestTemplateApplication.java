@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,9 +17,14 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-public class RestTemplateApplication {
+public class RestTemplateApplication extends SpringBootServletInitializer {
 	
 	private static final Logger logger = Logger.getLogger(RestTemplateApplication.class);
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(RestTemplateApplication.class);
+    }
 
     public static void main(String[] args) {
     	ApplicationContext ctx = SpringApplication.run(RestTemplateApplication.class, args);  

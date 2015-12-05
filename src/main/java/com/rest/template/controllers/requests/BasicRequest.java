@@ -4,14 +4,14 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class BasicModel {
+public class BasicRequest {
 	
 	private Integer id;
 	@NotEmpty
 	@Size(max=20)
 	private String content;
 	
-	public BasicModel(String content) {
+	public BasicRequest(String content) {
 		this.id = (int)(Math.random() * 1000);
 		this.content = content;
 	}

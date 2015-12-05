@@ -22,19 +22,20 @@ public class BasicController {
 	
 	@RequestMapping("/")
     public String index() {
-        return "Greetings from Spring Boot!";
+		logger.info("Rest Template Initialized.");
+        return "Rest Template!";
     }
 	
 	@RequestMapping(value="/echo/{message}", method = RequestMethod.GET)
     public Message echo(@PathVariable(value="message") String input) {
+		logger.info("/basic/echo/"+input);
         return new Message(input);
     }
 	
 	@RequestMapping(value="/new", method = RequestMethod.POST)
     public Message greeting(@RequestBody @Valid final BasicModel content, final BindingResult result) throws ValidationException {
-		
-		this.validate(result);
-		
+		logger.info("/basic/new/");		
+		this.validate(result);		
         return new Message("Successfully Inserted.");
     }
 	
